@@ -25,8 +25,11 @@
               <td>{{ survey.date }}</td>
               <td class="text-center">
                 <div class="action-buttons">
-                  <button class="btn btn-sm btn-success" @click="viewSurvey(index)">View</button>
-                  <button class="btn btn-sm btn-success" @click="editSurvey(index)">Edit</button>
+                  <!-- View Survey Button -->
+                  <router-link :to="`/survey/${index}/view`" class="btn btn-sm btn-success">View</router-link>
+                  <!-- Edit Survey Button -->
+                  <router-link :to="`/survey/${index}/edit`" class="btn btn-sm btn-success">Edit</router-link>
+                  <!-- Delete Survey Button -->
                   <button class="btn btn-sm btn-success" @click="deleteSurvey(index)">Delete</button>
                 </div>
               </td>
@@ -51,17 +54,20 @@ export default {
   },
   methods: {
     addSurvey() {
-      this.$router.push('/survey');  // Add this line to navigate to survey page
+      this.$router.push('/survey'); // Navigate to Add Survey page
     },
+    // View Survey method: Routes to the survey view page
     viewSurvey(index) {
-      alert(`Viewing survey: ${this.surveys[index].name}`);
+      this.$router.push(`/survey/${index}/view`); // Navigate to View Survey page
     },
+    // Edit Survey method: Routes to the survey edit page
     editSurvey(index) {
-      alert(`Editing survey: ${this.surveys[index].name}`);
+      this.$router.push(`/survey/${index}/edit`); // Navigate to Edit Survey page
     },
+    // Delete Survey method: Removes survey from the list
     deleteSurvey(index) {
       if (confirm(`Are you sure you want to delete ${this.surveys[index].name}?`)) {
-        this.surveys.splice(index, 1);
+        this.surveys.splice(index, 1); // Remove survey from the list
       }
     },
   },
@@ -69,11 +75,6 @@ export default {
 </script>
 
 <style scoped>
-.footer {
-  background-color: #006633;
-  width: 100%;
-  bottom: 0;
-}
 .custom-header {
   background-color: #006633;
   color: white;
